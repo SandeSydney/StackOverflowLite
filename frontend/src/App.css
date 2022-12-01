@@ -27,7 +27,12 @@ input {
   margin: 15px 0px;
 }
 
-.logContainer {
+.action-button {
+  max-width: 30px;
+}
+
+.logContainer,
+.container {
   background-image: linear-gradient(to bottom right, #47B5FF, rgba(71, 181, 255, 0.7));
   min-height: 100vh;
   display: flex;
@@ -37,9 +42,57 @@ input {
   color: #FFFFFF;
 }
 
+.container {
+  background-image: linear-gradient(to top left, rgba(6, 40, 61, 0.4), rgba(6, 40, 61, 0.4));
+  color: #000000;
+  gap: 10px;
+}
+
 .logNav {
   min-height: 10vh;
   padding: 20px;
+}
+
+nav {
+  background-color: rgba(6, 40, 61, 1);
+  min-height: 8vh;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 15px;
+}
+
+.ask{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.search{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
+}
+
+.search input{
+  max-width: 100px;
+  border-style: none;
+  border-radius: 8px;
+  padding: 3px;
+}
+.search img{
+  max-width: 22px;
 }
 
 .log-content {
@@ -49,6 +102,11 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.main-content{
+  justify-content: flex-start;
+  gap: 5px;
 }
 
 .log-content form {
@@ -71,7 +129,8 @@ form h2 {
   color: #FFFFFF;
 }
 
-.logNav img {
+.logNav img,
+nav img {
   max-width: 50px;
 }
 
@@ -103,6 +162,42 @@ form h2 {
   color: #FFFFFF;
 }
 
+.question-box{
+  display: flex;
+  border: none;
+  border-radius: 8px;
+  background-color: #F5F5F5;
+  padding: 5px;
+}
+
+.user-details{
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  align-items: center;
+}
+
+.user-details img{
+  width: 35px;
+  border-radius: 35px;
+}
+
+.qtnAns{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 13px;
+  padding: 5px 0px;
+}
+
+.question{
+  padding: 0px 5px;
+  font-size: 12px;
+}
+
+.answer-link{
+  color: #06283D;
+}
 
 @media only screen and (min-width: 480px) {
   .log-content {
@@ -125,6 +220,13 @@ form h2 {
 }
 
 @media only screen and (min-width: 768px) {
+
+  .logNav img,
+  nav img {
+    max-width: 60px;
+    margin-left: 80px;
+  }
+
   .logRequest-1 {
     display: flex;
     flex-direction: column;
