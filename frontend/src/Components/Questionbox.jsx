@@ -8,8 +8,7 @@ function Questionbox() {
       <div type='button' className='question-box'>
         <div className="user-details">
           <img src={userimg} alt="user profile pic" />
-          <p>John</p>
-          <p>Doe</p>
+          <p>John Doe</p>
         </div>
         <div className="qtnAns">
           <p className='question'>
