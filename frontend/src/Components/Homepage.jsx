@@ -19,7 +19,7 @@ function Homepage() {
                 <div className="links">
                     <Link className='linkItm' to={""}>Home</Link>
                     <Link className='linkItm' to={""}>Most Upvoted</Link>
-                    <Link className='linkItm' to={""}>Most Answered</Link>
+                    <Link className='linkItm' to={"most-answered"}>Most Answered</Link>
                 </div>
                 <div>
                     <div className="search-profile">
