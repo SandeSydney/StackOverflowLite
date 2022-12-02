@@ -6,6 +6,8 @@ import SearchBox from './SearchBox'
 import user from '../Resources/user.png'
 import Sidenav from './Sidenav'
 import Menubutton from './Menubutton'
+import Accordion from 'react-bootstrap/Accordion'
+import { Link, Outlet } from 'react-router-dom'
 
 
 function Homepage() {
@@ -14,16 +16,24 @@ function Homepage() {
             <nav>
                 <img src={logo} alt="logo" />
                 <div className="links">
-                    <a href='/'>Home</a>
-                    <a href='/'>Most Upvoted</a>
-                    <a href='/'>Most Answered</a>
+                    <a href='/home'>Home</a>
+                    <a href='/home'>Most Upvoted</a>
+                    <a href='/home'>Most Answered</a>
                 </div>
                 <div>
                     <div className="search-profile">
                         <SearchBox />
                         <div className="profile">
                             <img src={user} alt="Profile pic" />
-                            <p>John Doe</p>
+                            <Accordion defaultActiveKey={'0'}>
+                                <Accordion.Header>
+                                    John Doe
+                                </Accordion.Header>
+                                <Accordion.Body>
+                                    <Link to={'/'}>Logout</Link>
+                                </Accordion.Body>
+                            </Accordion>
+
                         </div>
                     </div>
                     <Menubutton />
@@ -38,17 +48,7 @@ function Homepage() {
                     <Sidenav />
                 </div>
                 <div className="main-content">
-                    <Questionbox />
-                    <Questionbox />
-                    <Questionbox />
-                    <Questionbox />
-                    <Questionbox />
-                    <Questionbox />
-                    <Questionbox />
-                    <Questionbox />
-                    <Questionbox />
-                    <Questionbox />
-                    <Questionbox />
+                    <Outlet/>
                 </div>
                 <div className="extra">
 
