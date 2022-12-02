@@ -4,7 +4,6 @@ import Questionbox from './Questionbox'
 function Questionsholder() {
     return (
         <div className="questions-holder">
-            <h2>All Questions</h2>
             <Questionbox />
             <Questionbox />
             <Questionbox />
