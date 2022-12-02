@@ -4,8 +4,8 @@
 }
 
 button {
-  min-width: 60px;
-  padding: 5px;
+  min-width: 80px;
+  padding: 5px 20px;
   border: 1px solid #47b5ff2d;
   border-radius: 5px;
   font-size: 16px;
@@ -27,12 +27,20 @@ input {
   background-color: orange;
 }
 
+.btnBack {
+  width: 35px;
+  align-self: flex-start;
+  border: 2px solid #06283d4d;
+  border-radius: 8px;
+  padding: 3px;
+}
+
 .loginSubmit {
   margin: 15px 0px;
 }
 
 .action-button {
-  max-width: 30px;
+  width: 30px;
 }
 
 .homepage-btn {
@@ -41,6 +49,13 @@ input {
 
 .dropdown-toggle::after {
   display: none !important;
+}
+
+.back-div {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .logContainer,
@@ -92,6 +107,7 @@ nav {
 
 .ask {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 5px;
 }
@@ -171,7 +187,6 @@ form select {
 }
 
 .form-div {
-  border: 1px solid blue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -179,12 +194,11 @@ form select {
 }
 
 .ask-form {
-  border: 1px solid red;
   border-radius: 15px;
-  background-color: #c4c4c4;
+  background-color: #c4c4c46c;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  min-width: 30vh;
   gap: 20px;
   padding: 20px;
   font-size: 16px;
@@ -320,10 +334,6 @@ nav img {
     align-items: center;
   }
 
-  .ask-form {
-    width: 80%;
-  }
-
   .question {
     font-size: 15px;
   }
@@ -399,13 +409,19 @@ nav img {
   .links {
     display: flex;
     justify-content: space-between;
-    min-width: 50vw;
+    min-width: 40vw;
     color: #ffffff;
   }
 
-  .links a {
+  .linkItm {
     color: #FFFFFF;
     text-decoration: none;
+  }
+
+  .linkItm:hover {
+    font-size: 101%;
+    cursor: pointer;
+    color: #47B5FF;
   }
 
   .profile {
@@ -463,5 +479,9 @@ nav img {
 
   .logRequest-2 {
     display: none;
+  }
+
+  .ask-form {
+    width: 80%;
   }
 }
