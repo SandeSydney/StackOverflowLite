@@ -4,14 +4,13 @@ import back from '../Resources/back.png'
 
 function Askquestion() {
     const navigate = useNavigate()
-    const handleBack = ()=>{
+    const handleBack = () => {
         navigate("/home")
     }
     return (
         <div className='form-div'>
             <div className="back-div" onClick={handleBack}>
                 <img className='btnBack' src={back} alt="Go Back" />
-                <p>Back</p>
             </div>
             <p>You have a question? Type it in the form and submit is it to get responses.</p>
             <form className='ask-form'>
