@@ -1,6 +1,5 @@
 import React from 'react'
 import userimg from '../Resources/user.png'
-import userimg2 from '../Resources/user6.jpeg'
 
 function Questionbox() {
   return (
