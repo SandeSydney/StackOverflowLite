@@ -24,7 +24,6 @@ function Homepage() {
                     <div className="search-profile">
                         <SearchBox />
                         <div className="profile">
-                            <img src={user} alt="Profile pic" />
                             <Accordion defaultActiveKey={'0'}>
                                 <Accordion.Header>
                                     John Doe
@@ -33,7 +32,7 @@ function Homepage() {
                                     <Link to={'/'}>Logout</Link>
                                 </Accordion.Body>
                             </Accordion>
-
+                            <img src={user} alt="Profile pic" />
                         </div>
                     </div>
                     <Menubutton />
