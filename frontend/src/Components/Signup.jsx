@@ -1,7 +1,15 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import logo from '../Resources/Logo.png'
 
 function Signup() {
+
+    const navigate = useNavigate()
+
+    const handleSignup = ()=>{
+        navigate("/")
+    }
+
     return (
         <div className='logContainer'>
             <div className="logNav">
@@ -30,7 +38,7 @@ function Signup() {
                         <label htmlFor="confpass">Confirm Password:</label>
                         <input name='confpass' type="password" />
                     </div>
-                    <button type="submit" className='btnSubmit loginSubmit'>Sign Up</button>
+                    <button type="submit" className='btnSubmit loginSubmit' onClick={handleSignup}>Sign Up</button>
 
                 </form>
                 <p className='logRequest-1'>
