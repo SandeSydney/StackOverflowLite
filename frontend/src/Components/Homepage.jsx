@@ -1,7 +1,6 @@
 import React from 'react'
 import logo from '../Resources/Logo.png'
 import AskButton from './AskButton'
-import Questionbox from './Questionbox'
 import SearchBox from './SearchBox'
 import user from '../Resources/user.png'
 import Sidenav from './Sidenav'
@@ -14,11 +13,13 @@ function Homepage() {
     return (
         <div className='container-main'>
             <nav>
-                <img src={logo} alt="logo" />
+                <Link to={""}>
+                    <img src={logo} alt="logo" />
+                </Link>
                 <div className="links">
-                    <a href='/home'>Home</a>
-                    <a href='/home'>Most Upvoted</a>
-                    <a href='/home'>Most Answered</a>
+                    <Link className='linkItm' to={""}>Home</Link>
+                    <Link className='linkItm' to={""}>Most Upvoted</Link>
+                    <Link className='linkItm' to={""}>Most Answered</Link>
                 </div>
                 <div>
                     <div className="search-profile">
@@ -47,7 +48,7 @@ function Homepage() {
                     <Sidenav />
                 </div>
                 <div className="main-content">
-                    <Outlet/>
+                    <Outlet />
                 </div>
                 <div className="extra">
 
