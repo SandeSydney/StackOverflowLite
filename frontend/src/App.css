@@ -33,6 +33,7 @@ input {
   border: 2px solid #06283d4d;
   border-radius: 8px;
   padding: 3px;
+  margin-bottom: 15px;
 }
 
 .loginSubmit {
