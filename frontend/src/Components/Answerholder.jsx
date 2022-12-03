@@ -1,8 +1,9 @@
 import React from 'react'
+import Answerbox from './Answerbox'
 
 function Answerholder() {
   return (
-    <div>Answerholder</div>
+    <Answerbox />
   )
 }
 
