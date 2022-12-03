@@ -67,5 +67,8 @@ export const questionsSlice = createSlice({
     }
 })
 
+export const getAllQuestions = (state)=>state.questions.content 
+export const getQuestionsStatus = (state)=>state.questions.status
+export const getQuestionsError = (state)=>state.questions.error
 export const { deteleQuestion } = questionsSlice.actions
 export default questionsSlice.reducer
