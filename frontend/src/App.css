@@ -1,38 +1,494 @@
-.App {
+* {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  min-width: 80px;
+  padding: 5px 20px;
+  border: 1px solid #47b5ff2d;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
   text-align: center;
+  color: #FFFFFF;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input {
+  padding: 5px;
+  font-size: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btnSubmit {
+  background-color: #1363DF;
 }
 
-.App-header {
-  background-color: #282c34;
+.btnReset {
+  background-color: orange;
+}
+
+.btnBack {
+  width: 35px;
+  align-self: flex-start;
+  border: 2px solid #06283d4d;
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 15px;
+}
+
+.loginSubmit {
+  margin: 15px 0px;
+}
+
+.action-button {
+  width: 30px;
+}
+
+.homepage-btn {
+  background-color: #06283D;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.back-div {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logContainer,
+.container-main {
+  background-image: linear-gradient(to bottom right, #47B5FF, rgba(71, 181, 255, 0.7));
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 20px;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.container-main {
+  background-image: linear-gradient(to top left, rgba(6, 40, 61, 0.2), rgba(6, 40, 61, 0.2));
+  color: #000000;
+  gap: 10px;
+}
+
+.error-page {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.logNav {
+  min-height: 10vh;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+nav {
+  background-color: rgba(6, 40, 61, 1);
+  min-height: 8vh;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+}
+
+.action-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 15px;
+}
+
+.ask {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
+}
+
+.section-head{
+  text-align: center;
+}
+
+.search input {
+  max-width: 100px;
+  border-style: none;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.search input:focus,
+form textarea,
+form select {
+  outline: none;
+}
+
+.search img {
+  max-width: 22px;
+}
+
+.log-content {
+  min-height: 60vh;
+  padding: 10px 20px;
+  margin: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px 30px;
+}
+
+.side-nav {
+  display: none;
+  flex: 1;
+  padding: 5px;
+}
+
+.main-content {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  gap: 5px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.extra {
+  flex: 1;
+  display: none;
+}
+
+.log-content form {
+  background-color: #06283de6;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ask-form {
+  border-radius: 15px;
+  background-color: #c4c4c46c;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  font-size: 16px;
+}
+
+form select,
+form textarea {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+}
+
+.form-element {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+form h2 {
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.logNav img,
+nav img {
+  max-width: 50px;
+}
+
+.formBtns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.logRequest-2 {
+  margin: 20px 10px;
+  text-align: center;
+  color: #000000;
+}
+
+.logRequest-1 {
+  display: none;
+}
+
+.logRequest .toSign {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.toSign {
+  color: #FFFFFF;
+}
+
+.question-box {
+  display: flex;
+  border: none;
+  border-radius: 8px;
+  background-color: #F5F5F5;
+  padding: 5px;
+}
+
+.answer-box {
+  border-top: 1px solid #06283d4d;
+  border-bottom: 1px solid #06283d4d;
+  display: flex;
+  width: 80%;
+  margin-left: 15%;
+  align-items: center;
+}
+
+.user-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  align-items: center;
+}
+
+.user-details img {
+  width: 35px;
+  border-radius: 35px;
+}
+
+.qtnAns {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 13px;
+  padding: 5px 0px;
+  cursor: pointer;
+}
+
+.question {
+  padding: 0px 5px;
+  font-size: 13px;
+}
+
+.answer-link {
+  color: #06283D;
+  font-size: 14px;
+  margin-right: 5%;
+}
+
+.links,
+.search-2,
+.profile {
+  display: none;
+}
+
+.search-profile {
+  display: none;
+}
+
+.questions-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+
+/* ****************************************************************************************
+* Media Queries Tablets
+* ******************************************************************************************/
+
+@media only screen and (min-width: 480px) {
+  .log-content {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+
+  .question {
+    font-size: 15px;
+  }
+
+  .questions-holder {
+    border-left: 2px solid #06283d4d;
+  }
+
+  .question-box {
+    width: 90%;
+  }
+
+  .log-content form {
+    min-width: 25vw;
+  }
+
+  .logContainer {
+    gap: 10px
+  }
+
+  .loginSubmit {
+    margin: 5px 0px;
+  }
+}
+
+
+/* ****************************************************************************************
+* Media Queries Laptops and Desktops
+* ******************************************************************************************/
+
+
+@media only screen and (min-width: 768px) {
+
+  .action-nav {
+    display: none;
+  }
+
+  .side-nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 20px;
+  }
+
+  button.accordion-button.collapsed,
+  button.accordion-button:not(.collapsed) {
+    margin: 0;
+    padding: 5px;
+    font-size: 12px;
+    border: none;
+    background-color: #06283D;
+    color: #FFFFFF;
+  }
+
+  button.accordion-button::after {
+    color: #FFFFFF;
+  }
+
+  .menubutton {
+    display: none;
+  }
+
+  .extra {
+    display: block;
+  }
+
+  .search-profile {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .links {
+    display: flex;
+    justify-content: space-between;
+    min-width: 40vw;
+    color: #ffffff;
+  }
+
+  .linkItm {
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+
+  .linkItm:hover {
+    font-size: 101%;
+    cursor: pointer;
+    color: #47B5FF;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 13px;
+    gap: 5px;
+  }
+
+  .profile img {
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .navimg {
+    display: none;
+  }
+
+  .logNav img,
+  nav img {
+    max-width: 60px;
+    padding: 0px 10px;
+  }
+
+  .logRequest-1 {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    align-items: flex-start;
+    /* text-align: center; */
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    min-height: 40vh;
+  }
+
+  .no-acc {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 300;
+  }
+
+  .shouter {
+    font-size: 36px;
+    font-weight: 900;
+  }
+
+  .shouter-2 {
+    color: #FFFFFF;
+    font-size: 30px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .logRequest-2 {
+    display: none;
+  }
+
+  .ask-form {
+    width: 80%;
   }
 }
