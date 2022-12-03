@@ -123,6 +123,10 @@ nav {
   border-radius: 8px;
 }
 
+.section-head{
+  text-align: center;
+}
+
 .search input {
   max-width: 100px;
   border-style: none;
@@ -266,6 +270,8 @@ nav img {
 }
 
 .answer-box {
+  border-top: 1px solid #06283d4d;
+  border-bottom: 1px solid #06283d4d;
   display: flex;
   width: 80%;
   margin-left: 15%;
