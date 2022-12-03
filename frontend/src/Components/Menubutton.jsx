@@ -11,13 +11,13 @@ function Menubutton() {
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 <Dropdown.Item>
-                    <Link to={'#'}>Home</Link>
+                    <Link to={""}>Home</Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                    <Link to={'#'}>Most Upvoted</Link>
+                    <Link to={"most-upvoted"}>Most Upvoted</Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                    <Link to={'#'}>Most Answered</Link>
+                    <Link to={"most-answered"}>Most Answered</Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
                     <Link to={'/'}>Logout</Link>
