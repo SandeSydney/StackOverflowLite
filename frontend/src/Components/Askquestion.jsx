@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import BackButton from './BackButton'
 
 function Askquestion() {
     const navigate = useNavigate()
