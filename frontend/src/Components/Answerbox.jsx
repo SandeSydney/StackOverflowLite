@@ -1,5 +1,8 @@
 import React from 'react'
 import userimg2 from '../Resources/user6.jpeg'
+import upvote from '../Resources/upvote.png'
+import downvote from '../Resources/downvote.png'
+import comment from '../Resources/comment.png'
 
 function Answerbox() {
   return (
@@ -19,9 +22,21 @@ function Answerbox() {
         </div>
       </div>
       <div className="answer-votes">
-        <p>Upvote</p>
-        <p>Downvote</p>
-        <p>Comment</p>
+        <div className="votes">
+          <p>0</p>
+          <img src={upvote} alt="Upvote" />
+          <p>Upvote</p>
+        </div>
+        <div className="votes">
+          <p>0</p>
+          <img src={downvote} alt="Downvote" />
+          <p>Downvote</p>
+        </div>
+        <div className="votes">
+          <p>0</p>
+          <img src={comment} alt="Comment" />
+          <p>Comment</p>
+        </div>
       </div>
     </div>
   )
