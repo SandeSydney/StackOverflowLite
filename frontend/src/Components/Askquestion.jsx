@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import back from '../Resources/back.png'
 
 function Askquestion() {
     const navigate = useNavigate()
@@ -9,9 +8,7 @@ function Askquestion() {
     }
     return (
         <div className='form-div'>
-            <div className="back-div" onClick={handleBack}>
-                <img className='btnBack' src={back} alt="Go Back" />
-            </div>
+            <BackButton handleBack={handleBack}/>
             <p>You have a question? Type it in the form and submit is it to get responses.</p>
             <form className='ask-form'>
                 <div className="form-element">
