@@ -461,9 +461,9 @@ nav img {
     align-items: flex-start;
     /* text-align: center; */
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 30px;
-    font-weight: 600;
-    min-height: 40vh;
+    font-size: 50px;
+    font-weight: 700;
+    min-height: 50vh;
   }
 
   .no-acc {
@@ -473,8 +473,9 @@ nav img {
   }
 
   .shouter {
-    font-size: 36px;
+    font-size: 60px;
     font-weight: 900;
+    font-stretch: ultra-expanded;
   }
 
   .shouter-2 {
