@@ -5,7 +5,7 @@ import userimg from '../Resources/user.png'
 function Questionbox() {
   const navigate = useNavigate()
   const viewAnswers = ()=>{
-    navigate("answers")
+    navigate("/home/answers")
   }
   return (
     <>
