@@ -1,6 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
-require("./Config/index")
+require("./config/index")
 
 const app = express()
 
