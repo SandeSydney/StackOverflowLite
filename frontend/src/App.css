@@ -123,7 +123,7 @@ nav {
   border-radius: 8px;
 }
 
-.section-head{
+.section-head {
   text-align: center;
 }
 
@@ -142,6 +142,18 @@ form select {
 
 .search img {
   max-width: 22px;
+}
+
+.votes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.votes img{
+  max-width: 30px;
+  max-height: 30px;
 }
 
 .log-content {
@@ -209,6 +221,23 @@ form select {
   font-size: 16px;
 }
 
+.answer-form {
+  border-radius: 10px;
+  background-color: #c4c4c46c;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.answer-form .form-element {
+  flex: 3;
+}
+
+.answer-form .formBtns {
+  flex: 1;
+}
+
 form select,
 form textarea {
   padding: 8px 10px;
@@ -236,6 +265,7 @@ nav img {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  gap: 10px;
   align-items: center;
 }
 
@@ -266,16 +296,29 @@ nav img {
   border: none;
   border-radius: 8px;
   background-color: #F5F5F5;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   padding: 5px;
 }
 
-.answer-box {
-  border-top: 1px solid #06283d4d;
+.answer-main {
   border-bottom: 1px solid #06283d4d;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.answer-box {
   display: flex;
   width: 80%;
   margin-left: 15%;
   align-items: center;
+}
+
+.answer-votes {
+  display: flex;
+  gap: 20px;
+  margin-left: 15%;
+  font-size: 14px;
 }
 
 .user-details {
@@ -296,7 +339,7 @@ nav img {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  font-size: 13px;
+  font-size: 14px;
   padding: 5px 0px;
   cursor: pointer;
 }
@@ -326,7 +369,7 @@ nav img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 10px;
 }
 
 
@@ -347,10 +390,7 @@ nav img {
 
   .questions-holder {
     border-left: 2px solid #06283d4d;
-  }
-
-  .question-box {
-    width: 90%;
+    padding-left: 10px;
   }
 
   .log-content form {
@@ -461,7 +501,7 @@ nav img {
     align-items: flex-start;
     /* text-align: center; */
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 50px;
+    font-size: 35px;
     font-weight: 700;
     min-height: 50vh;
   }
