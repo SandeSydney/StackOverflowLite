@@ -20,7 +20,7 @@ const sqlConfig = {
 
 mssql.connect(sqlConfig).then(pool=>{
     if(pool.connected){
-        console.log(`Connected to database`);
+        console.log(`Connected to ${process.env.DB_NAME} database`);
     }
 }).catch(err=>{
     console.log(err);
