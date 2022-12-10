@@ -18,16 +18,16 @@ const loginUser = async (req, res) => {
             const comparePass = await bcrypt.compare(password, user.password)
             if (comparePass) {
                 const { user_id, password, profile_picture, IsDeleted, ...payload } = user
-                const token = jwt.sign(payload, process.env.SECRET)
+                const token = jwt.sign(payload, process.env.SECRET, {expiresIn: "1 day"})
                 return res.status(200).json({ message: "Login Successful", token })
-            } else{
-                return res.status(400).send({message: "Password Incorrect!"})
+            } else {
+                return res.status(400).send({ message: "Password Incorrect!" })
             }
-        } else{
-            return res.status(404).send({message: "User unavailable. Kindly sign up!"})
+        } else {
+            return res.status(404).send({ message: "User unavailable. Kindly sign up!" })
         }
     } catch (error) {
-        return res.status(404).send({error: error.message})
+        return res.status(404).send({ error: error.message })
     }
 }
 
@@ -41,8 +41,10 @@ const signupUser = async (req, res) => {
             .input("username", username)
             .input("email", email)
             .input("password", hashed_pass)
-            .execute("")
-        res.status(201).json({ message: `Successfully added ${user.username}!` })
+            .execute("usp_SignupUpdateUser")
+        res.status(201).json({
+            message: `Successfully added ${username}!`
+        })
     } catch (error) {
         res.status(404).send({ error: error.message })
     }
