@@ -2,7 +2,7 @@ const mssql = require("mssql")
 const { sqlConfig } = require("../config/config")
 const { v4 } = require("uuid")
 const bcrypt = require("bcrypt")
-const dotenv = require("dotenv")
+const dotenv = require("dotenv").config()
 const jwt = require("jsonwebtoken")
 
 const loginUser = async (req, res) => {
