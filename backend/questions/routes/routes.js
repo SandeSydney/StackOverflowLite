@@ -1,9 +1,12 @@
-const { addUpdateQuestion, getQuestions, getQuestionById, deleteQuestion } = require("../controller/index")
+const { addUpdateQuestion, getQuestions, getQuestionById, deleteQuestion, getQuestionAnswers, addUpdateAnswer } = require("../controller/index")
 const router = require("express").Router()
 
 router.get("/", getQuestions)
-router.get("/:id", getQuestionById)
+router.get("/:question_id", getQuestionById)
 router.post("/", addUpdateQuestion)
-router.delete("/:id", deleteQuestion)
+router.delete("/:question_id", deleteQuestion)
+
+router.get("/:question_id/answers", getQuestionAnswers)
+router.post("/:question_id/answers", addUpdateAnswer)
 
 module.exports = { router }
