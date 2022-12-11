@@ -21,14 +21,14 @@ const getQuestions = async (req, res) => {
 
 const getQuestionById = async (req, res) => {
     try {
-        const { question_id} = req.params
+        const { question_id } = req.params
         const pool = await mssql.connect(sqlConfig)
         const question = await (await pool.request()
             .input("question_id", question_id)
             .execute("usp_GetQuestionById")
-        ).recordset
+        ).recordset[0]
 
-        if (question.length) {
+        if (question) {
             res.status(200).send(question)
         } else {
             res.status(404).send({ message: "The question does not exist!" })
@@ -62,9 +62,9 @@ const deleteQuestion = async (req, res) => {
         const question = await (await pool.request()
             .input("question_id", question_id)
             .execute("usp_GetQuestionById")
-        ).recordset
+        ).recordset[0]
 
-        if (question.length) {
+        if (question) {
             await pool.request()
                 .input("question_id", question_id)
                 .execute("usp_DeleteQuestion")
@@ -75,33 +75,53 @@ const deleteQuestion = async (req, res) => {
             }
         }
     } catch (error) {
-        res.status(404).send({error: error.message})
+        res.status(404).send({ error: error.message })
     }
 }
 
 
-const getQuestionAnswers = async(req, res)=>{
+const getQuestionAnswers = async (req, res) => {
     try {
-        const {question_id} = req.params
+        const { question_id } = req.params
         const pool = await mssql.connect(sqlConfig)
-        const answers = await( await pool.request()
+        const answers = await (await pool.request()
             .input("question_id", question_id)
             .execute("usp_GetQuestionAnswer")
         ).recordset
 
-        if(answers.length){
+        if (answers.length) {
             res.status(200).send(answers)
-        } else{
-            res.status(404).send({message:"No answers present."})
+        } else {
+            res.status(404).send({ message: "No answers present." })
         }
     } catch (error) {
-        res.status(404).send({error: error.message})
+        res.status(404).send({ error: error.message })
     }
 }
 
 
-const addUpdateAnswer = async(req, res)=>{
-    const { answer_id, question_id, user_id, answer, upvotes, downvotes, IsValid} = req.body
+const getAnswerById = async (req, res) => {
+    try {
+        const { answer_id } = req.params
+        const pool = await mssql.connect(sqlConfig)
+        const answer = await (await pool.request()
+            .input("answer_id", answer_id)
+            .execute("usp_GetAnswerById")
+        ).recordset[0]
+
+        if (answer) {
+            res.status(200).send(answer)
+        } else {
+            res.status(404).send({ message: "Answer not found!" })
+        }
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+}
+
+
+const addUpdateAnswer = async (req, res) => {
+    const { answer_id, question_id, user_id, answer, upvotes, downvotes, IsValid } = req.body
     const answer_date = new Date()
     const pool = await mssql.connect(sqlConfig)
     await pool.request()
@@ -114,7 +134,29 @@ const addUpdateAnswer = async(req, res)=>{
         .input("downvotes", downvotes)
         .input("IsValid", IsValid)
         .execute("usp_InsertUpdateAnswer")
-    res.status(201).send({message:"Answer posted successfully!"})
+    res.status(201).send({ message: "Answer posted successfully!" })
+}
+
+const deleteAnswer = async (req, res) => {
+    try {
+        const { answer_id } = req.params
+        const pool = await mssql.connect(sqlConfig)
+        const answer = await (await pool.request()
+            .input("answer_id", answer_id)
+            .execute("usp_GetAnswerById")
+        ).recordset[0]
+
+        if (answer) {
+            await pool.request()
+                .input("answer_id", answer_id)
+                .execute("usp_DeleteAnswer")
+            res.status(200).send("Answer deleted!")
+        } else {
+            return res.status(404).send({ message: "Answer not found!" })
+        }
+    } catch (error) {
+        return res.status(404).send({ error: error.message })
+    }
 }
 
 module.exports = {
@@ -123,5 +165,7 @@ module.exports = {
     getQuestionById,
     deleteQuestion,
     getQuestionAnswers,
-    addUpdateAnswer
+    addUpdateAnswer,
+    deleteAnswer,
+    getAnswerById
 }
