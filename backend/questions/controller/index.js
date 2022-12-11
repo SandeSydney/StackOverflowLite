@@ -101,7 +101,8 @@ const getQuestionAnswers = async(req, res)=>{
 
 
 const addUpdateAnswer = async(req, res)=>{
-    const { answer_id, question_id, user_id, answer_date, answer, upvotes, downvotes, IsValid} = req.body
+    const { answer_id, question_id, user_id, answer, upvotes, downvotes, IsValid} = req.body
+    const answer_date = new Date()
     const pool = await mssql.connect(sqlConfig)
     await pool.request()
         .input("answer_id", answer_id)
