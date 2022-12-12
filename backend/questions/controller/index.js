@@ -78,6 +78,11 @@ const deleteQuestion = async (req, res) => {
         res.status(404).send({ error: error.message })
     }
 }
+
+
+
+
+
 /* ***********************************************************************************************
 **************************************************************************************************/
 
@@ -122,7 +127,8 @@ const getAnswerById = async (req, res) => {
 
 
 const addUpdateAnswer = async (req, res) => {
-    const { answer_id, question_id, user_id, answer, upvotes, downvotes, IsValid } = req.body
+    const { question_id} = req.params
+    const { answer_id, user_id, answer, upvotes, downvotes, IsValid } = req.body
     const answer_date = new Date()
     const pool = await mssql.connect(sqlConfig)
     await pool.request()
@@ -161,6 +167,10 @@ const deleteAnswer = async (req, res) => {
 }
 
 
+
+
+
+
 /* ***********************************************************************************************
 **************************************************************************************************/
 
@@ -186,7 +196,8 @@ const getAnswerComments = async (req, res) => {
 
 const addUpdateComment = async (req, res) => {
     try {
-        const { comment_id, comment, answer_id, question_id, user_id } = req.body
+        const { question_id, answer_id } = req.params
+        const { comment_id, comment, user_id } = req.body
         const comment_date = new Date()
         const pool = await mssql.connect(sqlConfig)
         await pool.request()
@@ -222,7 +233,7 @@ const deleteComment = async (req, res) => {
             res.status(404).send({ message: "Comment Unavailable!" })
         }
     } catch (error) {
-        res.status(404).send({error: error.message})
+        res.status(404).send({ error: error.message })
     }
 }
 
