@@ -78,7 +78,8 @@ const deleteQuestion = async (req, res) => {
         res.status(404).send({ error: error.message })
     }
 }
-
+/* ***********************************************************************************************
+**************************************************************************************************/
 
 const getQuestionAnswers = async (req, res) => {
     try {
@@ -159,6 +160,77 @@ const deleteAnswer = async (req, res) => {
     }
 }
 
+
+/* ***********************************************************************************************
+**************************************************************************************************/
+
+const getAnswerComments = async (req, res) => {
+    try {
+        const { answer_id } = req.params
+        const pool = await mssql.connect(sqlConfig)
+        const comments = await (await pool.request()
+            .input("answer_id", answer_id)
+            .execute("usp_GetAnswerComments")
+        ).recordset
+
+        if (comments.length) {
+            res.status(200).send(comments)
+        } else {
+            res.status(404).send({ message: "No comments present." })
+        }
+    } catch (error) {
+        res.status(404).send({ error: error.message })
+    }
+}
+
+
+const addUpdateComment = async (req, res) => {
+    try {
+        const { comment_id, comment, answer_id, question_id, user_id } = req.body
+        const comment_date = new Date()
+        const pool = await mssql.connect(sqlConfig)
+        await pool.request()
+            .input("comment_id", comment_id)
+            .input("comment", comment)
+            .input("comment_date", comment_date)
+            .input("answer_id", answer_id)
+            .input("question_id", question_id)
+            .input("user_id", user_id)
+            .execute("usp_InsertUpdateComments")
+        res.status(201).send({ message: "Comment added successfully!" })
+    } catch (error) {
+        return res.status(404).send({ error: error.message })
+    }
+}
+
+
+const deleteComment = async (req, res) => {
+    try {
+        const { comment_id } = req.params
+        const pool = await mssql.connect(sqlConfig)
+        const comment = await (await pool.request()
+            .input("comment_id", comment_id)
+            .execute("usp_GetCommentById")
+        ).recordset[0]
+
+        if (comment) {
+            await pool.request()
+                .input("comment_id", comment_id)
+                .execute("usp_DeleteComment")
+            res.status(404).send({ message: "Comment Deleted" })
+        } else {
+            res.status(404).send({ message: "Comment Unavailable!" })
+        }
+    } catch (error) {
+        res.status(404).send({error: error.message})
+    }
+}
+
+
+/* ***********************************************************************************************
+**************************************************************************************************/
+
+
 module.exports = {
     addUpdateQuestion,
     getQuestions,
@@ -167,5 +239,8 @@ module.exports = {
     getQuestionAnswers,
     addUpdateAnswer,
     deleteAnswer,
-    getAnswerById
+    getAnswerById,
+    getAnswerComments,
+    addUpdateComment,
+    deleteComment
 }
