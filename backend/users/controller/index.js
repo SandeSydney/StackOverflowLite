@@ -53,7 +53,7 @@ const signupUser = async (req, res) => {
 
 const verifyUser = async (req, res) => {
     try {
-        const token = req.headers['token']
+        const token = req.headers['token'] || req.headers['Authorization'] || req.headers['X-Auth-Token']
         if (!token) {
             return res.status(401).send({ message: "Access Denied. Supply a token!" })
         }
