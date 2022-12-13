@@ -19,7 +19,7 @@ const loginUser = async (req, res) => {
             if (comparePass) {
                 const { user_id, password, profile_picture, IsDeleted, ...payload } = user
                 const token = jwt.sign(payload, process.env.SECRET, {expiresIn: "1 day"})
-                return res.status(200).json({ message: "Login Successful", token })
+                return res.status(200).json({ message: "Login Successful", token, user_id:user_id})
             } else {
                 return res.status(400).send({ message: "Password Incorrect!" })
             }
