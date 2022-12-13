@@ -1,4 +1,5 @@
 const { addUpdateQuestion, getQuestions, getQuestionById, deleteQuestion, getQuestionAnswers, addUpdateAnswer, getAnswerById, deleteAnswer, getAnswerComments, addUpdateComment, deleteComment } = require("../controller/index")
+const { token_verifier } = require("../middleware/token_verifier")
 const router = require("express").Router()
 
 router.get("/", getQuestions)
