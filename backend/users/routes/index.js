@@ -1,8 +1,10 @@
-const { loginUser, signupUser } = require("../controller/index")
-const router = require("express").Router()
+const { loginUser, signupUser, verifyUser } = require("../controller/index")
+const {Router} = require("express")
 
-router.get("/login", loginUser)
+const router = Router()
+router.post("/login", loginUser)
 router.post("/signup", signupUser)
+router.get("/verify-user", verifyUser)
 
 module.exports = {
     router
