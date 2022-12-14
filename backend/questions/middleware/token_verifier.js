@@ -19,6 +19,7 @@ const token_verifier = async (req, res, next) => {
     } catch (error) {
         return res.status(404).send({ error: error.message })
     }
+    next()
 }
 
 
