@@ -20,7 +20,7 @@ const sqlConfig = {
 
 mssql.connect(sqlConfig).then(pool=>{
     if(pool.connected){
-        console.log(`Connected to ${process.env.DB_NAME} database`);
+        console.log(`Auth Service connected to ${process.env.DB_NAME}`);
     }
 }).catch(err=>{
     console.log(err);
