@@ -17,8 +17,8 @@ const loginUser = async (req, res) => {
         if (user) {
             const comparePass = await bcrypt.compare(password, user.password)
             if (comparePass) {
-                const { user_id, password, profile_picture, IsDeleted, ...payload } = user
-                const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1 day" })
+                const { username, email, user_id } = user
+                let token = jwt.sign({user: username, email:email}, process.env.SECRET, { expiresIn: "1 day" })
                 return res.status(200).json({ message: "Login Successful", token, user_id: user_id })
             } else {
                 return res.status(400).send({ message: "Password Incorrect!" })
@@ -52,18 +52,21 @@ const signupUser = async (req, res) => {
 
 
 const verifyUser = async (req, res) => {
-    try {
-        const token = req.headers['token'] || req.headers['Authorization'] || req.headers['X-Auth-Token']
-        if (!token) {
-            return res.status(401).send({ message: "Access Denied. Supply a token!" })
-        }
 
-        const user = jwt.verify(token, process.env.SECRET)
-        if (user) {
-            return res.status(200).send(true)
+    const token = req.headers['token'] || req.headers['Authorization'] || req.headers['X-Auth-Token']
+    if (!token) {
+        return res.status(401).send({ message: "Access Denied. Supply a token!" })
+    } else {
+        try {
+            const user = jwt.verify(token, process.env.SECRET)
+            if (user) {
+                return res.status(200).send(true)
+            } else{
+                return res.status(401).send(false)
+            }
+        } catch (error) {
+            res.status(401).send({error: error.message})
         }
-    } catch (error) {
-        res.status(401).send(false)
     }
 }
 

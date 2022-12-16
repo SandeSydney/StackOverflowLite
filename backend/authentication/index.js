@@ -8,5 +8,5 @@ app.use(express.json())
 app.use("/users", router)
 
 app.listen(port || 4040, () => {
-    console.log(`Server running on port: ${port}`);
+    console.log(`Users service running on port: ${port}`);
 })
