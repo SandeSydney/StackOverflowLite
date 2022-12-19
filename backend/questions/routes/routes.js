@@ -2,7 +2,7 @@ const { addUpdateQuestion, getQuestions, getQuestionById, deleteQuestion, getQue
 const { token_verifier } = require("../middleware/token_verifier")
 const router = require("express").Router()
 
-router.get("/", token_verifier, getQuestions)
+router.get("/", getQuestions)
 router.get("/:question_id", getQuestionById)
 router.post("/", token_verifier, addUpdateQuestion)
 router.delete("/:question_id", token_verifier, deleteQuestion)

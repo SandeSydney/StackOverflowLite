@@ -1,9 +1,21 @@
 import React from 'react'
 import menu from '../Resources/menubar.png'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserLoggedIn, logoutUser } from '../Features/usersSlice'
 
 function Menubutton() {
+
+    const isLoggedIn = useSelector(getUserLoggedIn)
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const handleLogout = ()=>{
+        dispatch(logoutUser())
+    }
+
     return (
         <Dropdown className='menubutton'>
             <Dropdown.Toggle id="dropdown-basic">
@@ -20,7 +32,7 @@ function Menubutton() {
                     <Link to={"most-answered"}>Most Answered</Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                    <Link to={'/'}>Logout</Link>
+                    <Link to={"/"} onClick={handleLogout}>Logout</Link>
                 </Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>

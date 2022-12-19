@@ -6,10 +6,22 @@ import user from '../Resources/user.png'
 import Sidenav from './Sidenav'
 import Menubutton from './Menubutton'
 import Accordion from 'react-bootstrap/Accordion'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { getUserLoggedIn, logoutUser } from '../Features/usersSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 function Homepage() {
+
+    const isLoggedIn = useSelector(getUserLoggedIn)
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(logoutUser())
+    }
+
     return (
         <div className='container-main'>
             <nav>
@@ -30,7 +42,8 @@ function Homepage() {
                                     John Doe
                                 </Accordion.Header>
                                 <Accordion.Body>
-                                    <Link to={'/'}>Logout</Link>
+                                    <Link to={'/'}>
+                                        <p onClick={handleLogout}>Logout</p></Link>
                                 </Accordion.Body>
                             </Accordion>
                             <img src={user} alt="Profile pic" />

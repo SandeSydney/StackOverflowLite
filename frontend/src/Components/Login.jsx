@@ -1,19 +1,52 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import logo from '../Resources/Logo.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserError, getUserLoggedIn, getUsersStatus, loginUser } from '../Features/usersSlice';
 
 function Login() {
     const navigate = useNavigate()
 
+    const dispatch = useDispatch()
+
+    const error = useSelector(getUserError)
+    const isLoggedIn = useSelector(getUserLoggedIn)
+
+    const emailRef = useRef(null)
+    const passRef = useRef(null)
+
+    const [emailErr, setEmailErr] = useState(false)
+    const [passErr, setPassErr] = useState(false)
+
     const handleLogin = (event) => {
         event.preventDefault();
+        if (emailRef.current.value.trim() && passRef.current.value.trim()) {
+            const user_details = {
+                email: emailRef.current.value,
+                password: passRef.current.value
+            }
+            try {
+                dispatch(loginUser(user_details))
+            } catch (error) {
+                console.log(error.message);
+            }
+
+            emailRef.current.value = ''
+            passRef.current.value = ''
+        } else{
+            console.log("Enter email & pass");
+        }
+    }
+
+    if(isLoggedIn){
         navigate("/home")
     }
 
-    const handleSignup = (event)=>{
+    const handleSignup = (event) => {
         event.preventDefault();
         navigate("/signup")
     }
+
 
     return (
         <div className='logContainer'>
@@ -37,11 +70,11 @@ function Login() {
                     <h2>Login</h2>
                     <div className="form-element">
                         <label htmlFor="email">Email:</label>
-                        <input type="email" name='email' />
+                        <input ref={emailRef} type="email" name='email' />
                     </div>
                     <div className="form-element">
                         <label htmlFor="pass">Password:</label>
-                        <input type="password" />
+                        <input ref={passRef} type="password" />
                     </div>
                     <button type="submit" className='btnSubmit loginSubmit' onClick={handleLogin}>
                         Login
