@@ -22,7 +22,6 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
                 question: response.data[key].question
             })
         }
-        console.log(questionsData);
         return questionsData
     } catch (error) {
         return error.message
