@@ -64,7 +64,7 @@ export const questionsSlice = createSlice({
                 state.error = action.error.message
             })
             .addCase(addNewQuestion.fulfilled, (state, action) => {
-                state.status = 'succeeded'
+                state.status = 'idle'
             })
     }
 })
