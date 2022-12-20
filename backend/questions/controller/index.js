@@ -55,6 +55,25 @@ const getQuestionAuthor = async (req, res) => {
     }
 }
 
+const getUserQuestions = async (req, res) => {
+    try {
+        const user_id = req.headers['user_id']
+        const pool = await mssql.connect(sqlConfig)
+        const questions = await (await pool.request()
+            .input("user_id", user_id)
+            .execute("usp_GetQuestionsByOneUser")
+        ).recordset
+
+        if (questions.length) {
+            res.status(200).send(questions)
+        } else{
+            res.status(404).send({"message":"You havent posted any question."})
+        }
+    } catch (error) {
+        return res.status(404).send({error: error.message})
+    }
+}
+
 const addUpdateQuestion = async (req, res) => {
     try {
         const user_id = req.headers['user_id']
@@ -267,6 +286,7 @@ module.exports = {
     addUpdateQuestion,
     getQuestions,
     getQuestionById,
+    getUserQuestions,
     getQuestionAuthor,
     deleteQuestion,
     getQuestionAnswers,
