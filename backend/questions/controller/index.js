@@ -57,9 +57,10 @@ const getQuestionAuthor = async (req, res) => {
 
 const addUpdateQuestion = async (req, res) => {
     try {
+        const user_id = req.headers['user_id']
         const question_id = v4()
         const question_date = new Date()
-        const { user_id, subject, question } = req.body
+        const { subject, question } = req.body
         const pool = await mssql.connect(sqlConfig)
         await pool.request()
             .input("question_id", question_id)
@@ -146,8 +147,9 @@ const getAnswerById = async (req, res) => {
 
 
 const addUpdateAnswer = async (req, res) => {
+    const user_id = req.headers['user_id']
     const { question_id } = req.params
-    const { answer_id, user_id, answer, upvotes, downvotes, IsValid } = req.body
+    const { answer_id, answer, upvotes, downvotes, IsValid } = req.body
     const answer_date = new Date()
     const pool = await mssql.connect(sqlConfig)
     await pool.request()
@@ -214,8 +216,9 @@ const getAnswerComments = async (req, res) => {
 
 const addUpdateComment = async (req, res) => {
     try {
+        const user_id = req.headers['user_id']
         const { question_id, answer_id } = req.params
-        const { comment_id, comment, user_id } = req.body
+        const { comment_id, comment } = req.body
         const comment_date = new Date()
         const pool = await mssql.connect(sqlConfig)
         await pool.request()
