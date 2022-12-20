@@ -5,12 +5,23 @@ const USERS_DB_URL = 'http://localhost:4040/users'
 
 const initialState = {
     content: [],
+    profile: {},
     token: '',
     status: 'idle',
     isLoggedIn: false,
     error: null
 }
 
+export const getUserById = createAsyncThunk('users/getUser', async (user_id) => {
+    try {
+        const response = await axios.get(`${USERS_DB_URL}/${user_id}`)
+        const user_data = []
+        user_data.push(response.data)
+        return user_data
+    } catch (error) {
+        return error.message
+    }
+})
 
 export const loginUser = createAsyncThunk('users/loginUser', async (user_details) => {
     try {
@@ -18,7 +29,7 @@ export const loginUser = createAsyncThunk('users/loginUser', async (user_details
             if (response.data.token) {
                 localStorage.setItem("user/token", JSON.stringify(response.data.token))
                 localStorage.setItem("user/user_id", JSON.stringify(response.data.user_id))
-            } else{
+            } else {
                 console.log("Invalid Details");
             }
         })
@@ -30,7 +41,7 @@ export const loginUser = createAsyncThunk('users/loginUser', async (user_details
 export const addUser = createAsyncThunk('users/addUser', async (user_details) => {
     try {
         const response = await axios.post(`${USERS_DB_URL}/signup`, user_details)
-        return response.data
+        console.log(response);
     } catch (error) {
         return error.message
     }
@@ -43,12 +54,16 @@ export const usersSlice = createSlice({
         logoutUser(state, action) {
             state.status = 'idle'
             state.isLoggedIn = false
+            state.profile = ''
         }
     },
     extraReducers(builder) {
         builder
             .addCase(addUser.fulfilled, (state, action) => {
                 state.content.push(action.payload)
+            })
+            .addCase(getUserById.fulfilled, (state, action) => {
+                state.profile = action.payload[0]
             })
             .addCase(loginUser.pending, (state, action) => {
                 state.status = 'loading'
@@ -57,7 +72,7 @@ export const usersSlice = createSlice({
                 state.status = 'succeeded'
                 if (!action.payload) {
                     state.isLoggedIn = true
-                } else{
+                } else {
                     state.error = "User Not Found!"
                 }
             })
@@ -69,7 +84,9 @@ export const usersSlice = createSlice({
 })
 
 export const getUser = (state) => state.users.content
+export const getUserProfile = (state) => state.users.profile
 export const getUserLoggedIn = (state) => state.users.isLoggedIn
 export const getUserError = (state) => state.users.error
+export const getUserStatus = (state) => state.users.status
 export const { logoutUser } = usersSlice.actions
 export default usersSlice.reducer
