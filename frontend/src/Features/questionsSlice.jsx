@@ -17,8 +17,9 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
             questionsData.push({
                 question_id: response.data[key].question_id,
                 user_id: response.data[key].user_id,
+                username: response.data[key].username,
                 subject: response.data[key].subject,
-                question_date: response.data[key].subject,
+                question_date: response.data[key].question_date,
                 question: response.data[key].question
             })
         }
