@@ -32,7 +32,7 @@ const getQuestionAuthor = createAsyncThunk('questions/getAuthor', async(question
     try {
         const response = await axios.get()
     } catch (error) {
-        
+        return error.message
     }
 })
 
