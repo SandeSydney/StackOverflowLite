@@ -6,6 +6,7 @@ import ErrorPage from '../Components/ErrorPage'
 import Login from '../Components/Login'
 import MostAnswered from '../Components/MostAnswered'
 import MostUpvoted from '../Components/MostUpvoted'
+import MyQuestions from '../Components/MyQuestions'
 import Questionsholder from '../Components/Questionsholder'
 import Signup from '../Components/Signup'
 
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
             {
                 path: 'most-upvoted',
                 element: <MostUpvoted />
+            },
+            {
+                path: 'my-questions',
+                element: <MyQuestions />
             }
         ]
     }
