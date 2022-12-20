@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../Resources/Logo.png'
 import AskButton from './AskButton'
 import SearchBox from './SearchBox'
@@ -7,16 +7,26 @@ import Sidenav from './Sidenav'
 import Menubutton from './Menubutton'
 import Accordion from 'react-bootstrap/Accordion'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { getUserLoggedIn, logoutUser } from '../Features/usersSlice'
+import { getUserById, getUserError, getUserLoggedIn, getUserProfile, getUserStatus, logoutUser } from '../Features/usersSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 
 function Homepage() {
 
-    const isLoggedIn = useSelector(getUserLoggedIn)
-
+    let user_profile = useSelector(getUserProfile)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const status = useSelector(getUserStatus)
+    const error = useSelector(getUserError)
+
+    const user_id = JSON.parse(localStorage.getItem("user/user_id"))
+
+    useEffect(() => {
+        if (status == 'idle') {
+            dispatch(getUserById(user_id))
+
+        }
+    }, [status, dispatch])
 
     const handleLogout = () => {
         dispatch(logoutUser())
@@ -39,7 +49,7 @@ function Homepage() {
                         <div className="profile">
                             <Accordion defaultActiveKey={'0'}>
                                 <Accordion.Header>
-                                    John Doe
+                                    {user_profile.username}
                                 </Accordion.Header>
                                 <Accordion.Body>
                                     <Link to={'/'}>
