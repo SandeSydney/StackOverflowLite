@@ -1,5 +1,7 @@
 CREATE OR ALTER PROCEDURE usp_GetAllQuestions
 AS
 BEGIN
-    SELECT * FROM [dbo].[Questions]
+    SELECT Questions.question_id, Questions.user_id, Users.username, Questions.subject, Questions.question
+    FROM Questions
+    INNER JOIN Users on Questions.user_id = Users.user_id
 END

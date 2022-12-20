@@ -5,6 +5,23 @@ const bcrypt = require("bcrypt")
 const dotenv = require("dotenv").config()
 const jwt = require("jsonwebtoken")
 
+
+const getUserById = async (req, res) => {
+    try {
+        const { user_id } = req.params
+        const pool = await mssql.connect(sqlConfig)
+        const user = await (await pool.request().input("user_id", user_id).execute("usp_GetUserById")).recordset[0]
+
+        if (user) {
+            res.status(200).send(user)
+        } else {
+            res.status(404).send({ "message": "User not found!" })
+        }
+    } catch (error) {
+        return res.status(404).send({ error: error.message })
+    }
+}
+
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body
@@ -18,7 +35,7 @@ const loginUser = async (req, res) => {
             const comparePass = await bcrypt.compare(password, user.password)
             if (comparePass) {
                 const { username, email, user_id } = user
-                let token = jwt.sign({user: username, email:email}, process.env.SECRET, { expiresIn: "1 day" })
+                let token = jwt.sign({ user: username, email: email }, process.env.SECRET, { expiresIn: "1 day" })
                 return res.status(200).json({ message: "Login Successful", token, user_id: user_id })
             } else {
                 return res.status(400).send({ message: "Password Incorrect!" })
@@ -33,7 +50,8 @@ const loginUser = async (req, res) => {
 
 const signupUser = async (req, res) => {
     try {
-        const { user_id, username, email, password } = req.body
+        const user_id = v4()
+        const { username, email, password } = req.body
         const pool = await mssql.connect(sqlConfig)
         const hashed_pass = await bcrypt.hash(password, 10)
         await pool.request()
@@ -61,11 +79,11 @@ const verifyUser = async (req, res) => {
             const user = jwt.verify(token, process.env.SECRET)
             if (user) {
                 return res.status(200).send(true)
-            } else{
+            } else {
                 return res.status(401).send(false)
             }
         } catch (error) {
-            res.status(401).send({error: error.message})
+            res.status(401).send({ error: error.message })
         }
     }
 }
@@ -73,5 +91,6 @@ const verifyUser = async (req, res) => {
 module.exports = {
     loginUser,
     signupUser,
-    verifyUser
+    verifyUser,
+    getUserById
 }

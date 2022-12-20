@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import userimg from '../Resources/user.png'
 
-function Questionbox() {
+function Questionbox({ question }) {
   const navigate = useNavigate()
+
   const viewAnswers = ()=>{
     navigate("/home/answers")
   }
@@ -12,11 +14,14 @@ function Questionbox() {
       <div type='button' className='question-box'>
         <div className="user-details">
           <img src={userimg} alt="user profile pic" />
-          <p>John Doe</p>
+          <p>{question.username}</p>
         </div>
         <div className="qtnAns">
           <p className='question'>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident odio, animi illum laudantium ratione sunt expedita reiciendis fugiat sint dolores tempora, deleniti atque nam repudiandae praesentium ut beatae quibusdam nesciunt.
+            {question.question}
+          </p>
+          <p className='subject'>
+            Subject: {question.subject}
           </p>
           <button className='answer-link' onClick={viewAnswers}>Answers (3)</button>
         </div>

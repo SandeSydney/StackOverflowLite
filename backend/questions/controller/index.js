@@ -38,9 +38,29 @@ const getQuestionById = async (req, res) => {
     }
 }
 
+const getQuestionAuthor = async (req, res) => {
+    try {
+        const { question_id } = req.params
+        const pool = await mssql.connect(sqlConfig)
+        const author = await (await pool.request()
+            .input("question_id", question_id)
+            .execute("usp_GetQuestionAuthor")
+        ).recordset[0]
+
+        if (author) {
+            res.status(200).send(author)
+        }
+    } catch (error) {
+        return res.status(404).send({ error: error.message })
+    }
+}
+
 const addUpdateQuestion = async (req, res) => {
     try {
-        const { question_id, user_id, subject, question_date, question } = req.body
+        const user_id = req.headers['user_id']
+        const question_id = v4()
+        const question_date = new Date()
+        const { subject, question } = req.body
         const pool = await mssql.connect(sqlConfig)
         await pool.request()
             .input("question_id", question_id)
@@ -127,8 +147,9 @@ const getAnswerById = async (req, res) => {
 
 
 const addUpdateAnswer = async (req, res) => {
-    const { question_id} = req.params
-    const { answer_id, user_id, answer, upvotes, downvotes, IsValid } = req.body
+    const user_id = req.headers['user_id']
+    const { question_id } = req.params
+    const { answer_id, answer, upvotes, downvotes, IsValid } = req.body
     const answer_date = new Date()
     const pool = await mssql.connect(sqlConfig)
     await pool.request()
@@ -193,11 +214,11 @@ const getAnswerComments = async (req, res) => {
     }
 }
 
-
 const addUpdateComment = async (req, res) => {
     try {
+        const user_id = req.headers['user_id']
         const { question_id, answer_id } = req.params
-        const { comment_id, comment, user_id } = req.body
+        const { comment_id, comment } = req.body
         const comment_date = new Date()
         const pool = await mssql.connect(sqlConfig)
         await pool.request()
@@ -246,6 +267,7 @@ module.exports = {
     addUpdateQuestion,
     getQuestions,
     getQuestionById,
+    getQuestionAuthor,
     deleteQuestion,
     getQuestionAnswers,
     addUpdateAnswer,

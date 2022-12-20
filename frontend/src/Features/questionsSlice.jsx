@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import auth_helper from '../Components/AuthenticationHelper'
 
-const QUESTIONS_DB_URL = ''
+const QUESTIONS_DB_URL = 'http://localhost:3030/questions'
 
 const initialState = {
     content: [],
-    status: idle,
+    status: 'idle',
     error: null,
 }
 
@@ -17,8 +18,9 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
             questionsData.push({
                 question_id: response.data[key].question_id,
                 user_id: response.data[key].user_id,
+                username: response.data[key].username,
                 subject: response.data[key].subject,
-                question_date: response.data[key].subject,
+                question_date: response.data[key].question_date,
                 question: response.data[key].question
             })
         }
@@ -30,7 +32,7 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
 
 export const addNewQuestion = createAsyncThunk('questions/addNewQuestion', async (initialQuestion) => {
     try {
-        const response = await axios.post(QUESTIONS_DB_URL, initialQuestion)
+        const response = await axios.post(QUESTIONS_DB_URL, initialQuestion, { headers: auth_helper() })
         return response.data
     } catch (error) {
         return error.message
@@ -67,8 +69,8 @@ export const questionsSlice = createSlice({
     }
 })
 
-export const getAllQuestions = (state)=>state.questions.content 
-export const getQuestionsStatus = (state)=>state.questions.status
-export const getQuestionsError = (state)=>state.questions.error
+export const getAllQuestions = (state) => state.questions.content
+export const getQuestionsStatus = (state) => state.questions.status
+export const getQuestionsError = (state) => state.questions.error
 export const { deteleQuestion } = questionsSlice.actions
 export default questionsSlice.reducer
