@@ -5,6 +5,23 @@ const bcrypt = require("bcrypt")
 const dotenv = require("dotenv").config()
 const jwt = require("jsonwebtoken")
 
+
+const getUserById = async (req, res) => {
+    try {
+        const { user_id } = req.params
+        const pool = await mssql.connect(sqlConfig)
+        const user = await (await pool.request().input("user_id", user_id).execute("usp_GetUserById")).recordset[0]
+
+        if (user) {
+            res.status(200).send(user)
+        } else {
+            res.status(404).send({ "message": "User not found!" })
+        }
+    } catch (error) {
+        return res.status(404).send({ error: error.message })
+    }
+}
+
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body
@@ -74,5 +91,6 @@ const verifyUser = async (req, res) => {
 module.exports = {
     loginUser,
     signupUser,
-    verifyUser
+    verifyUser,
+    getUserById
 }
