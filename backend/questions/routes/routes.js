@@ -1,10 +1,11 @@
-const { addUpdateQuestion, getQuestions, getQuestionById, deleteQuestion, getQuestionAnswers, addUpdateAnswer, getAnswerById, deleteAnswer, getAnswerComments, addUpdateComment, deleteComment, getQuestionAuthor } = require("../controller/index")
+const { addUpdateQuestion, getQuestions, getQuestionById, deleteQuestion, getQuestionAnswers, addUpdateAnswer, getAnswerById, deleteAnswer, getAnswerComments, addUpdateComment, deleteComment, getQuestionAuthor, getUserQuestions } = require("../controller/index")
 const { token_verifier } = require("../middleware/token_verifier")
 const router = require("express").Router()
 
 router.get("/", getQuestions)
 router.get("/:question_id", getQuestionById)
-router.get("/author/:question_id", getQuestionAuthor)
+router.get("/user-questions/:user_id", token_verifier, getUserQuestions)
+router.get("/author/:question_id", token_verifier, getQuestionAuthor)
 router.post("/", token_verifier, addUpdateQuestion)
 router.delete("/:question_id", token_verifier, deleteQuestion)
 
