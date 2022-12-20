@@ -5,7 +5,7 @@ import questionsReducer from '../Features/questionsSlice'
 const store = configureStore({
     reducer: {
         users: usersReducer,
-        questions: questionsReducer
+        questions: questionsReducer,
     }
 })
 
