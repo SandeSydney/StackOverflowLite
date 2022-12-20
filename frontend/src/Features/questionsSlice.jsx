@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const QUESTIONS_DB_URL = ''
+const QUESTIONS_DB_URL = 'http://localhost:3030/questions'
 
 const initialState = {
     content: [],
-    status: idle,
+    status: 'idle',
     error: null,
 }
 
@@ -22,6 +22,7 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
                 question: response.data[key].question
             })
         }
+        console.log(questionsData);
         return questionsData
     } catch (error) {
         return error.message
