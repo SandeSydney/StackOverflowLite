@@ -3,7 +3,7 @@ export default function auth_helper() {
     const user_id = JSON.parse(localStorage.getItem("user/user_id"))
 
     if (user_id && token) {
-        return { "x-access-token": token, "user_id": user_id }
+        return { "x-auth-token": token, "user_id": user_id }
     } else {
         return {}
     }
