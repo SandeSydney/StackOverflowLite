@@ -55,6 +55,9 @@ export const usersSlice = createSlice({
             state.status = 'idle'
             state.isLoggedIn = false
             state.profile = ''
+        },
+        changePage(state, action){
+            state.status = 'idle'
         }
     },
     extraReducers(builder) {
@@ -69,7 +72,7 @@ export const usersSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(loginUser.fulfilled, (state, action) => {
-                state.status = 'succeeded'
+                state.status = 'idle'
                 if (!action.payload) {
                     state.isLoggedIn = true
                 } else {
@@ -88,5 +91,5 @@ export const getUserProfile = (state) => state.users.profile
 export const getUserLoggedIn = (state) => state.users.isLoggedIn
 export const getUserError = (state) => state.users.error
 export const getUserStatus = (state) => state.users.status
-export const { logoutUser } = usersSlice.actions
+export const { logoutUser, changePage } = usersSlice.actions
 export default usersSlice.reducer
