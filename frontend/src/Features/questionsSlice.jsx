@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import auth_helper from '../Components/AuthenticationHelper'
 
 const QUESTIONS_DB_URL = 'http://localhost:3030/questions'
 
@@ -31,7 +32,7 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
 
 export const addNewQuestion = createAsyncThunk('questions/addNewQuestion', async (initialQuestion) => {
     try {
-        const response = await axios.post(QUESTIONS_DB_URL, initialQuestion)
+        const response = await axios.post(QUESTIONS_DB_URL, initialQuestion, { headers: auth_helper() })
         return response.data
     } catch (error) {
         return error.message
