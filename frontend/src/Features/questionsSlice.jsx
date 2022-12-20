@@ -28,14 +28,6 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
     }
 })
 
-const getQuestionAuthor = createAsyncThunk('questions/getAuthor', async(question_id)=>{
-    try {
-        const response = await axios.get()
-    } catch (error) {
-        return error.message
-    }
-})
-
 export const addNewQuestion = createAsyncThunk('questions/addNewQuestion', async (initialQuestion) => {
     try {
         const response = await axios.post(QUESTIONS_DB_URL, initialQuestion)
