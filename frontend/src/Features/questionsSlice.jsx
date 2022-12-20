@@ -28,6 +28,14 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
     }
 })
 
+const getQuestionAuthor = createAsyncThunk('questions/getAuthor', async(question_id)=>{
+    try {
+        const response = await axios.get()
+    } catch (error) {
+        
+    }
+})
+
 export const addNewQuestion = createAsyncThunk('questions/addNewQuestion', async (initialQuestion) => {
     try {
         const response = await axios.post(QUESTIONS_DB_URL, initialQuestion)
@@ -67,8 +75,8 @@ export const questionsSlice = createSlice({
     }
 })
 
-export const getAllQuestions = (state)=>state.questions.content 
-export const getQuestionsStatus = (state)=>state.questions.status
-export const getQuestionsError = (state)=>state.questions.error
+export const getAllQuestions = (state) => state.questions.content
+export const getQuestionsStatus = (state) => state.questions.status
+export const getQuestionsError = (state) => state.questions.error
 export const { deteleQuestion } = questionsSlice.actions
 export default questionsSlice.reducer
