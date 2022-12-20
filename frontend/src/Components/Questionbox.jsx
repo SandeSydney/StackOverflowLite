@@ -8,8 +8,6 @@ function Questionbox({ question }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const qtn_author = question.user_id
-
   const viewAnswers = ()=>{
     navigate("/home/answers")
   }
