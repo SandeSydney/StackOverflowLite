@@ -33,7 +33,7 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
 export const addNewQuestion = createAsyncThunk('questions/addNewQuestion', async (initialQuestion) => {
     try {
         const response = await axios.post(QUESTIONS_DB_URL, initialQuestion, { headers: auth_helper() })
-        return response.data
+        console.log(response.data)
     } catch (error) {
         return error.message
     }
@@ -64,7 +64,7 @@ export const questionsSlice = createSlice({
                 state.error = action.error.message
             })
             .addCase(addNewQuestion.fulfilled, (state, action) => {
-                state.content.push(action.payload)
+                state.status = 'succeeded'
             })
     }
 })
