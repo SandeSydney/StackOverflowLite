@@ -27,6 +27,7 @@ function Askquestion() {
 
             subjRef.current.value = 'software dev'
             questionRef.current.value = ''
+            navigate("/home")
         } else {
             console.log("Can't submit empty values!");
         }
