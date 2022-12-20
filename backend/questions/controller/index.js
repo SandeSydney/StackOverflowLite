@@ -57,7 +57,9 @@ const getQuestionAuthor = async (req, res) => {
 
 const addUpdateQuestion = async (req, res) => {
     try {
-        const { question_id, user_id, subject, question_date, question } = req.body
+        const question_id = v4()
+        const question_date = new Date()
+        const { user_id, subject, question } = req.body
         const pool = await mssql.connect(sqlConfig)
         await pool.request()
             .input("question_id", question_id)
