@@ -20,9 +20,17 @@ function Questionsholder() {
     if (status === 'loading') {
         <p>Loading...</p>
     } else if (status === 'succeeded') {
-        questions_content = questions.map((question, question_id) => {
-            return <Questionbox key={question_id} question={question} />
-        })
+
+        if (questions.length) {
+
+            questions_content = questions.map((question, question_id) => {
+                return <Questionbox key={question_id} question={question}/>
+            })
+
+        } else {
+            <p style={{ "alignItems": "center" }}>No Questions Yet!</p>
+        }
+
     } else if (status === 'failed') {
         questions_content = <p>{error}</p>
     }
