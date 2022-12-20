@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import userimg from '../Resources/user.png'
 
-function Questionbox() {
+function Questionbox({ question }) {
   const navigate = useNavigate()
   const viewAnswers = ()=>{
     navigate("/home/answers")
@@ -16,7 +16,7 @@ function Questionbox() {
         </div>
         <div className="qtnAns">
           <p className='question'>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident odio, animi illum laudantium ratione sunt expedita reiciendis fugiat sint dolores tempora, deleniti atque nam repudiandae praesentium ut beatae quibusdam nesciunt.
+            {question.question}
           </p>
           <button className='answer-link' onClick={viewAnswers}>Answers (3)</button>
         </div>
