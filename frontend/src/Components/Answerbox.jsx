@@ -4,16 +4,13 @@ import upvote from '../Resources/upvote.png'
 import downvote from '../Resources/downvote.png'
 import comment from '../Resources/comment.png'
 
-function Answerbox() {
+function Answerbox({ answer, answer_id, downvotes, question_id, upvotes, user_id }) {
   return (
     <div className="answer-main">
       <div className='answer-box'>
         <div className='qtnAns'>
           <p className='answer'>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident odio, animi illum laudantium ratione sunt expedita reiciendis fugiat sint dolores tempora, deleniti atque nam repudiandae praesentium ut beatae quibusdam nesciunt.
-          </p>
-          <p className='answer'>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident odio, animi illum laudantium ratione sunt expedita reiciendis fugiat sint dolores tempora, deleniti atque nam repudiandae praesentium ut beatae quibusdam nesciunt.
+            {answer}
           </p>
         </div>
         <div className="user-details">
@@ -23,12 +20,12 @@ function Answerbox() {
       </div>
       <div className="answer-votes">
         <div className="votes">
-          <p>0</p>
+          <p>{upvotes}</p>
           <img src={upvote} alt="Upvote" />
           <p>Upvote</p>
         </div>
         <div className="votes">
-          <p>0</p>
+          <p>{downvotes}</p>
           <img src={downvote} alt="Downvote" />
           <p>Downvote</p>
         </div>

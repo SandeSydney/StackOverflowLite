@@ -10,9 +10,9 @@ const initialState = {
     error: null
 }
 
-export const fetchAnswers = createAsyncThunk("answers/fetchAnswers", async () => {
+export const fetchAnswers = createAsyncThunk("answers/fetchAnswers", async (question_id) => {
     try {
-        const response = await axios.get(ANSWERS_DB_URL)
+        const response = await axios.get(`${ANSWERS_DB_URL}/${question_id}/answers`)
         let answersData = []
         for (let key in response.data) {
             answersData.push({
@@ -24,6 +24,8 @@ export const fetchAnswers = createAsyncThunk("answers/fetchAnswers", async () =>
                 downvotes: response.data[key].downvotes,
                 user_id: response.data[key].user_id
             })
+
+            return answersData
         }
     } catch (error) {
         return error.message
@@ -54,6 +56,7 @@ export const answersSlice = createSlice({
                 const answersLoaded = action.payload.map(answer => {
                     return answer
                 })
+                state.content = state.content.concat(answersLoaded)
             })
             .addCase(fetchAnswers.rejected, (state, action) => {
                 state.status = "failed"
