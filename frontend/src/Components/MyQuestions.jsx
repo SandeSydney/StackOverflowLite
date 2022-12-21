@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchQuestions, getAllQuestions, getQuestionsError, getQuestionsStatus } from '../Features/questionsSlice'
+import { getAllQuestions, getMyQuestions, getQuestionsError, getQuestionsStatus } from '../Features/questionsSlice'
+import { getUserStatus } from '../Features/usersSlice'
 import Questionbox from './Questionbox'
 
-function Questionsholder() {
+function MyQuestions() {
+
     const dispatch = useDispatch()
 
-    const questions = useSelector(getAllQuestions)
+    const my_questions = useSelector(getAllQuestions)
     const status = useSelector(getQuestionsStatus)
     const error = useSelector(getQuestionsError)
 
     useEffect(() => {
         if (status === 'idle') {
-            dispatch(fetchQuestions())
+            dispatch(getMyQuestions())
         }
     }, [status, dispatch])
 
@@ -21,9 +23,9 @@ function Questionsholder() {
         <p>Loading...</p>
     } else if (status === 'succeeded') {
 
-        if (questions.length) {
+        if (my_questions.length) {
 
-            questions_content = questions.map((questionItm) => {
+            questions_content = my_questions.map((questionItm) => {
 
 
                 const question_id = questionItm.question_id
@@ -52,6 +54,7 @@ function Questionsholder() {
         questions_content = <p>{error}</p>
     }
 
+
     return (
         <div className="questions-holder">
             {questions_content}
@@ -59,4 +62,4 @@ function Questionsholder() {
     )
 }
 
-export default Questionsholder
+export default MyQuestions

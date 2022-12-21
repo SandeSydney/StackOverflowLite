@@ -30,10 +30,31 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
     }
 })
 
+export const getMyQuestions = createAsyncThunk('questions/getMyQuestions', async () => {
+    try {
+        const user_id = auth_helper().user_id
+        const response = await axios.get(`${QUESTIONS_DB_URL}/user-questions/${user_id}`, { headers: auth_helper() })
+        let myQstnData = []
+        for (let key in response.data) {
+            myQstnData.push({
+                question_id: response.data[key].question_id,
+                user_id: response.data[key].user_id,
+                username: response.data[key].username,
+                subject: response.data[key].subject,
+                question_date: response.data[key].question_date,
+                question: response.data[key].question
+            })
+        }
+        return myQstnData
+    } catch (error) {
+        return error.message
+    }
+})
+
 export const addNewQuestion = createAsyncThunk('questions/addNewQuestion', async (initialQuestion) => {
     try {
         const response = await axios.post(QUESTIONS_DB_URL, initialQuestion, { headers: auth_helper() })
-        return response.data
+        console.log(response.data)
     } catch (error) {
         return error.message
     }
@@ -64,7 +85,17 @@ export const questionsSlice = createSlice({
                 state.error = action.error.message
             })
             .addCase(addNewQuestion.fulfilled, (state, action) => {
-                state.content.push(action.payload)
+                state.status = 'idle'
+            })
+            .addCase(getMyQuestions.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(getMyQuestions.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                const questionsLoaded = action.payload.map(question => {
+                    return question
+                })
+                state.content = state.content.concat(questionsLoaded)
             })
     }
 })

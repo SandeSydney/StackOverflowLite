@@ -6,14 +6,14 @@ import user from '../Resources/user.png'
 import Sidenav from './Sidenav'
 import Menubutton from './Menubutton'
 import Accordion from 'react-bootstrap/Accordion'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { getUserById, getUserError, getUserLoggedIn, getUserProfile, getUserStatus, logoutUser } from '../Features/usersSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 
 function Homepage() {
 
-    let user_profile = useSelector(getUserProfile)
+    const user_profile = useSelector(getUserProfile)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const status = useSelector(getUserStatus)
@@ -24,7 +24,6 @@ function Homepage() {
     useEffect(() => {
         if (status == 'idle') {
             dispatch(getUserById(user_id))
-
         }
     }, [status, dispatch])
 

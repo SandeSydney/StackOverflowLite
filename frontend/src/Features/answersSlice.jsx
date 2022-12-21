@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from 'axios'
+import auth_helper from "../Components/AuthenticationHelper"
 
-const ANSWERS_DB_URL = ''
+const ANSWERS_DB_URL = 'http://localhost:3030/questions'
 
 const initialState = {
     content: [],
@@ -29,9 +30,10 @@ export const fetchAnswers = createAsyncThunk("answers/fetchAnswers", async () =>
     }
 })
 
-export const addAnswer = createAsyncThunk("amswers/addAnswer", async (answer_details) => {
+export const addAnswer = createAsyncThunk("answers/addAnswer", async (answer_details) => {
     try {
-        const response = await axios.post(ANSWERS_DB_URL, answer_details)
+        const question_id = answer_details.question_id
+        const response = await axios.post(`${ANSWERS_DB_URL}/${question_id}/answers`, answer_details, { headers: auth_helper() })
         return response.data
     } catch (error) {
         return error.message
@@ -57,14 +59,14 @@ export const answersSlice = createSlice({
                 state.status = "failed"
                 state.error = action.error.message
             })
-            .addCase(addAnswer.fulfilled, (state, action)=>{
-                state.content.push(action.payload)
+            .addCase(addAnswer.fulfilled, (state, action) => {
+                state.status = "idle"
             })
     }
 })
 
 
-export const getAllAnswers = (state)=>state.answers.content
-export const getAnswersStatus = (state)=>state.answers.status
-export const getAnswersError = (state)=>state.answers.error
+export const getAllAnswers = (state) => state.answers.content
+export const getAnswersStatus = (state) => state.answers.status
+export const getAnswersError = (state) => state.answers.error
 export default answersSlice.reducer
