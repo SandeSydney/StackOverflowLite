@@ -91,7 +91,7 @@ export const questionsSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(getMyQuestions.fulfilled, (state, action) => {
-                // state.status = 'succeeded'
+                state.status = 'succeeded'
                 const questionsLoaded = action.payload.map(question => {
                     return question
                 })
