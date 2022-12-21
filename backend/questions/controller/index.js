@@ -66,11 +66,11 @@ const getUserQuestions = async (req, res) => {
 
         if (questions.length) {
             res.status(200).send(questions)
-        } else{
-            res.status(404).send({"message":"You havent posted any question."})
+        } else {
+            res.status(404).send({ "message": "You havent posted any question." })
         }
     } catch (error) {
-        return res.status(404).send({error: error.message})
+        return res.status(404).send({ error: error.message })
     }
 }
 
@@ -168,7 +168,8 @@ const getAnswerById = async (req, res) => {
 const addUpdateAnswer = async (req, res) => {
     const user_id = req.headers['user_id']
     const { question_id } = req.params
-    const { answer_id, answer, upvotes, downvotes, IsValid } = req.body
+    const answer_id = v4()
+    const { answer, upvotes, downvotes, IsValid } = req.body
     const answer_date = new Date()
     const pool = await mssql.connect(sqlConfig)
     await pool.request()
