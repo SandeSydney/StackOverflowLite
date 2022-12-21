@@ -33,7 +33,7 @@ function Questionbox({ question_id, username, user_id, subject, question_date, q
           <p className='subject'>
             Subject: {question_data.subject}
           </p>
-          <button className='answer-link' onClick={viewAnswers}>Answers (3)</button>
+          <button className='answer-link' onClick={viewAnswers}>Answers</button>
         </div>
       </div>
     </>
