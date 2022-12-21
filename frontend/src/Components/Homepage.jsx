@@ -13,8 +13,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 function Homepage() {
 
-    const location = useLocation()
-
     const user_profile = useSelector(getUserProfile)
     const navigate = useNavigate()
     const dispatch = useDispatch()
