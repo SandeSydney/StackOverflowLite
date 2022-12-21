@@ -23,8 +23,25 @@ function Questionsholder() {
 
         if (questions.length) {
 
-            questions_content = questions.map((question, question_id) => {
-                return <Questionbox key={question_id} question={question}/>
+            questions_content = questions.map((questionItm) => {
+
+
+                const question_id = questionItm.question_id
+                const username = questionItm.username
+                const user_id = questionItm.user_id
+                const subject = questionItm.subject
+                const question_date = questionItm.question_date
+                const question = questionItm.question
+
+
+                return <Questionbox
+                    key={question_id}
+                    question={question}
+                    question_id={question_id}
+                    username={username}
+                    user_id={user_id}
+                    subject={subject}
+                    question_date={question_date} />
             })
 
         } else {
