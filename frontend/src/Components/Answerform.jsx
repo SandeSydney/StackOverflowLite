@@ -16,6 +16,7 @@ function Answerform() {
 
     if (answerRef.current.value.trim()) {
       const answer_details = {
+        question_id: question_id,
         answer: answerRef.current.value,
         upvotes: 0,
         downvotes: 0,
