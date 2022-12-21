@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
                 errorElement: <ErrorPage />
             },
             {
-                path: 'answers',
+                path: 'question/:question_id/answers',
                 element: <Answerholder />
             },
             {
