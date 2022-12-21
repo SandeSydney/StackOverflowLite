@@ -8,11 +8,7 @@ import Questionbox from './Questionbox'
 function Answerholder() {
   const location = useLocation()
 
-  console.log(location.state);
-
   const navigate = useNavigate()
-
-  const question_data = location.state
 
   const handleBack = () => {
     navigate("/home")
@@ -28,8 +24,6 @@ function Answerholder() {
         subject={location.state.subject}
         question_date={location.state.question_date} />
       <Answerform />
-      <Answerbox />
-      <Answerbox />
       <Answerbox />
     </>
   )
