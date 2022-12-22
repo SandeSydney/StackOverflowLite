@@ -43,7 +43,7 @@ function Answerholder() {
 
       {answers.map((answerItem, ansIdx) => {
         console.log(answerItem);
-
+        
         const answer = answerItem.answer
         const answer_id = answerItem.answer_id
         const downvotes = answerItem.downvotes
