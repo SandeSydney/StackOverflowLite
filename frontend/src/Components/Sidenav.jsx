@@ -16,13 +16,21 @@ function Sidenav() {
     const askquestion = () => {
         navigate("/home/ask-question")
     }
+
+    const myProfile = ()=>{
+
+    }
+    
     return (
         <>
+            <button className='homepage-btn' onClick={askquestion}>
+                Ask Question
+            </button>
             <button className='homepage-btn' onClick={myQuestions}>
                 My Questions
             </button>
-            <button className='homepage-btn' onClick={askquestion}>
-                Ask Question
+            <button className='homepage-btn' onClick={myProfile}>
+                My Profile
             </button>
         </>
     )
