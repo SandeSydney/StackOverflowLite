@@ -6,6 +6,7 @@ import ErrorPage from '../Components/ErrorPage'
 import Login from '../Components/Login'
 import MostAnswered from '../Components/MostAnswered'
 import MostUpvoted from '../Components/MostUpvoted'
+import MyProfile from '../Components/MyProfile'
 import MyQuestions from '../Components/MyQuestions'
 import Questionsholder from '../Components/Questionsholder'
 import Signup from '../Components/Signup'
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
             {
                 path: 'my-questions',
                 element: <MyQuestions />
+            },
+            {
+                path: 'my-profile',
+                element: <MyProfile />
             }
         ]
     }

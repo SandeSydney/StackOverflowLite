@@ -18,7 +18,7 @@ function Sidenav() {
     }
 
     const myProfile = () => {
-
+        navigate("/home/my-profile")
     }
 
     return (
