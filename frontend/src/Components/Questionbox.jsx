@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import userimg from '../Resources/user.png'
+import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
 
 function Questionbox({ question_id, username, user_id, subject, question_date, question }) {
   const navigate = useNavigate()
@@ -37,8 +38,8 @@ function Questionbox({ question_id, username, user_id, subject, question_date, q
             </div>
             {(question_data.user_id === isLoggedinUser) ?
               <div className='actions'>
-                <p>Edit</p>
-                <p>Delete</p>
+                <FaPencilAlt size='18px' color='amber'/>
+                <FaTrashAlt size='18px' color='tomato'/>
               </div> :
               <div></div>}
           </div>
